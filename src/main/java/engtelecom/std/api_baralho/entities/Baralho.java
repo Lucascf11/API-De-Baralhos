@@ -20,13 +20,6 @@ public class Baralho {
         return cartas;
     }
     
-
-    public Baralho(String id) {
-        this.id = id;
-        this.cartas = new ArrayList<>();
-        this.estaEmbaralhado = false;
-    }
-
     public boolean isEstaEmbaralhado() {
         return estaEmbaralhado;
     }
@@ -35,7 +28,14 @@ public class Baralho {
         this.estaEmbaralhado = estaEmbaralhado;
     }
 
+    public Baralho(String id) {
+        this.id = id;
+        this.cartas = new ArrayList<>();
+        this.estaEmbaralhado = false;
+    }
+
     public void iniciarCartas(){
+
         for(Naipes naipe: Naipes.values()){
 
             String codigoNaipe = String.valueOf(naipe.naipe.charAt(0));
@@ -47,6 +47,9 @@ public class Baralho {
                 
             }
         }
+
+        Carta cartaNova = this.cartas.get(0);
+        cartaNova.getNaipe().getNaipe();
     }
 
     public void embaralharCartas(){
@@ -55,6 +58,7 @@ public class Baralho {
     }
 
     public ArrayList<Carta> retirarCartas(int n){
+
         ArrayList<Carta> cartasRetiradas = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
@@ -63,6 +67,7 @@ public class Baralho {
                 this.cartas.remove(0);
             }
         }
+
         return cartasRetiradas;
     }
 

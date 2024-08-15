@@ -16,14 +16,14 @@ public class BaralhoService {
         return idBaralho;
     }
 
-    public ArrayList<String> retornarTodosBaralhos(){
-        ArrayList<String> idBaralhos = new ArrayList<>();
-       
-        for(String id: this.baralhos.keySet()){
-            idBaralhos.add(id);
-        }
-
-        return idBaralhos;
+    public Set<String> retornarTodosBaralhos(){
+        return this.baralhos.keySet();
     }
+
+    public Baralho excluirBaralho(String id){
+        return this.baralhos.remove(id);
+    }
+
+    
 
 }

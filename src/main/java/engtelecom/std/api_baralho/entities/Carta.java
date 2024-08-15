@@ -15,4 +15,11 @@ public class Carta {
     @NonNull
     private final Valores valor;
     
+    public String obterNaipe(){
+        return this.naipe.getNaipe();
+    }
+
+    public String obterValor(){
+        return this.getValor().getCodigo();
+    }
 }
