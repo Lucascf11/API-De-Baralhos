@@ -1,14 +1,18 @@
 package engtelecom.std.api_baralho.entities;
 
-import io.micrometer.common.lang.NonNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NonNull;
 
 @Data
 @AllArgsConstructor
 public class Carta {
+    
+    @NonNull
+    private String codigo;
     @NonNull
     private final Naipes naipe;
     @NonNull
     private final Valores valor;
+    
 }
