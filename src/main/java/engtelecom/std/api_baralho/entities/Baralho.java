@@ -44,12 +44,8 @@ public class Baralho {
 
                 String codigoValor = valor.codigo;
                 this.cartas.add(new Carta(codigoValor+codigoNaipe, naipe, valor));
-                
             }
         }
-
-        Carta cartaNova = this.cartas.get(0);
-        cartaNova.getNaipe().getNaipe();
     }
 
     public void embaralharCartas(){
@@ -57,17 +53,15 @@ public class Baralho {
        this.setEstaEmbaralhado(true);
     }
 
-    public ArrayList<Carta> retirarCartas(int n){
+    public ArrayList<Carta> retirarNCartas(int n){
 
         ArrayList<Carta> cartasRetiradas = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
             if(!(this.cartas.isEmpty())){
-                cartasRetiradas.add(this.cartas.get(0));
-                this.cartas.remove(0);
+                cartasRetiradas.add(this.cartas.remove(0));
             }
         }
-
         return cartasRetiradas;
     }
 

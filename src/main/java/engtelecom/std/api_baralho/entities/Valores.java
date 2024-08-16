@@ -1,7 +1,7 @@
 package engtelecom.std.api_baralho.entities;
 
 public enum Valores {
-    AS("Ás","1"),
+    AS("As","1"),
     DOIS("2","2"),
     TRES("3","3"),
     QUATRO("4","4"),

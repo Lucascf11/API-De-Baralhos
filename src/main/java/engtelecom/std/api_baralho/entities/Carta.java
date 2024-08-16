@@ -20,6 +20,6 @@ public class Carta {
     }
 
     public String obterValor(){
-        return this.getValor().getCodigo();
+        return this.getValor().getValor();
     }
 }
