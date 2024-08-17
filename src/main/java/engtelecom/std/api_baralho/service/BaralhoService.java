@@ -40,7 +40,7 @@ public class BaralhoService {
 
     public boolean excluirBaralho(String id){
 
-        if(id != null){
+        if(this.baralhos.containsKey(id)){
             this.baralhos.remove(id);
             return true;
         }
