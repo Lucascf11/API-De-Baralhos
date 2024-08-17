@@ -47,6 +47,10 @@ public class BaralhoService {
         return false;
     }
 
+    public int obterCartasRestantes(String id){
+        return this.baralhos.get(id).getCartas().size();
+    }
+
     public HashMap<String, Baralho> getBaralhos() {
         return baralhos;
     }

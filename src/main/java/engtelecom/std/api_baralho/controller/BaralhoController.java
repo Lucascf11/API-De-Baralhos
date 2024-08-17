@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -40,15 +41,18 @@ public class BaralhoController {
     @ResponseStatus(HttpStatus.OK)
     public StringBuilder retornarTodasAsCartasDeBaralho (@PathVariable String id){
 
+        if(!(this.baralhoService.getBaralhos().containsKey(id))){
+            return this.jsonBaralhoNaoEncontrado();
+        }
+
         StringBuilder jsonSeBaralhoNormal = this.formatarJsonCartas(this.baralhoService.retornarTodasAsCartasDeBaralho(id));
         StringBuilder jsonSeBaralhoEmbaralhado = new StringBuilder();
-
-        jsonSeBaralhoEmbaralhado.append("\"Erro\":\"Baralho está embaralhado, não foi possível retornar as cartas");
-
+        
         if(!(this.baralhoService.getBaralhos().get(id).isEstaEmbaralhado())){
             return jsonSeBaralhoNormal;
         }
 
+        jsonSeBaralhoEmbaralhado.append("{").append("\"Erro\":\"Baralho embaralhado, cartas nao podem ser listadas\"").append("}");
         return jsonSeBaralhoEmbaralhado;
     }
 
@@ -64,6 +68,22 @@ public class BaralhoController {
     public String criarBaralho(){
         return this.baralhoService.criarBaralho();
     }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public StringBuilder embaralharCartas(String id){
+
+        StringBuilder jsonEmbaralhou = new StringBuilder();
+
+        if(!(this.baralhoService.getBaralhos().containsKey(id))){
+            return this.jsonBaralhoNaoEncontrado();
+        }
+            this.baralhoService.embaralharBaralho(id);
+            jsonEmbaralhou.append("{").append("\"Operação\":\"Sucesso\",");
+            jsonEmbaralhou.append("\"CartasRestantes\":\"").append(this.baralhoService.obterCartasRestantes(id)).append("\"}");
+            return jsonEmbaralhou;
+    }
+
 
     @DeleteMapping("/{id}")
     public String deletarBaralho(@PathVariable String id){
@@ -97,5 +117,13 @@ public class BaralhoController {
         json.append("}");
 
         return json;
+
     }
+
+    private StringBuilder jsonBaralhoNaoEncontrado(){
+        StringBuilder jsonNaoEncontrou = new StringBuilder();
+        jsonNaoEncontrou.append("{").append("\"Erro\":\"Baralho nao encontrado\"").append("}");
+        return jsonNaoEncontrou;
+    }
+
 }

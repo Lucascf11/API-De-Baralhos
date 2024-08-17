@@ -4,7 +4,7 @@ package engtelecom.std.api_baralho.entities;
 public enum Naipes {
     COPAS("copas",0),
     ESPADAS("espadas",1), 
-    OUROS("ouro",2),
+    OUROS("ouros",2),
     PAUS("paus",3);
 
     public final int codigo;
