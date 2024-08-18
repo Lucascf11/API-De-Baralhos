@@ -87,8 +87,9 @@ public class BaralhoController {
         
         // Embaralha as cartas e retorna um JSON informando que a operação foi bem sucedida e o número de cartas restantes nesse baralho
         this.baralhoService.embaralharBaralho(id);
-        jsonEmbaralhou.append("{").append("\"Operacao\":\"Sucesso\",");
-        jsonEmbaralhou.append("\"CartasRestantes\":\"").append(this.baralhoService.obterCartasRestantes(id)).append("\"}");
+        jsonEmbaralhou.append("{").append("\"Operacao\":\"Sucesso\",").
+        append("\"CartasRestantes\":\"").append(this.baralhoService.obterCartasRestantes(id))
+        .append("\"}");
         return jsonEmbaralhou;
     }
     
@@ -124,8 +125,10 @@ public class BaralhoController {
             return jsonRetorno;
         }else{
             ArrayList<Carta> cartasRetiradas = this.baralhoService.retirarNCartasDeBaralho(id, numeroCartas);
-            jsonRetorno.append(formatarJsonCartas(cartasRetiradas)).deleteCharAt(jsonRetorno.length() - 1).append(",");
-            jsonRetorno.append("\"CartasRestantes\":\"").append(this.baralhoService.obterCartasRestantes(id)).append("\"}");
+            jsonRetorno.append(formatarJsonCartas(cartasRetiradas))
+            .deleteCharAt(jsonRetorno.length() - 1).append(",") // Aqui estamos somente delentando a última chave do formatador de JSON para a ArrayList de cartas para adicionarmos os campos de cartas restantes
+            .append("\"CartasRestantes\":\"").append(this.baralhoService.obterCartasRestantes(id))
+            .append("\"}");
         }
 
         return jsonRetorno;
@@ -172,7 +175,10 @@ public class BaralhoController {
     // Método privado que monta um JSON dizendo que baralho não foi encontrado
     private StringBuilder jsonBaralhoNaoEncontrado(){
         StringBuilder jsonNaoEncontrou = new StringBuilder();
-        jsonNaoEncontrou.append("{").append("\"Erro\":\"Baralho nao encontrado\"").append("}");
+        jsonNaoEncontrou.append("{")
+        .append("\"Erro\":\"Baralho nao encontrado\",")
+        .append("\"Status\":").append(HttpStatus.NOT_FOUND.value())
+        .append("}");
         return jsonNaoEncontrou;
     }
 
