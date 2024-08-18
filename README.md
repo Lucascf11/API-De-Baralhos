@@ -47,13 +47,13 @@ em Java com o uso do framework Spring Boot e deve permitir as seguintes operaç�
  - [x] Excluir um baralho
 
 ## Requisitos atendidos
-- [ ] Indicar no arquivo Readme.md os requisitos atendidos e não atendidos
-- [ ] Desenho da API RESTful em Java com a lógica correta para cada operação
-- [ ] Implementação da API RESTful em JAva com a lógica correta para cada operação
-- [ ] Documentação API RESTful com o uso do OpenAPI
-- [ ] Arquivo Readme.md com instruções com o cURL para testar cada operação da API
-- [ ] Arquivo .gitignore adequado para cada projeto Java com Gradle
-- [ ] Após clonar o repositório, ser possível compilar e executar usando o gradle bootRun
+- [x] Indicar no arquivo Readme.md os requisitos atendidos e não atendidos
+- [x] Desenho da API RESTful em Java com a lógica correta para cada operação
+- [x] Implementação da API RESTful em JAva com a lógica correta para cada operação
+- [x] Documentação API RESTful com o uso do OpenAPI
+- [x] Arquivo Readme.md com instruções com o cURL para testar cada operação da API
+- [x] Arquivo .gitignore adequado para cada projeto Java com Gradle
+- [x] Após clonar o repositório, ser possível compilar e executar usando o gradle bootRun
 
 ## Desenho da API
 ![A imagem PNG do desenho da API](/images/Tabela_Projeto.png)
