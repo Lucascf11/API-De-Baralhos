@@ -34,6 +34,7 @@ public class Baralho {
         this.estaEmbaralhado = false;
     }
 
+    // Método que permite o baralho se iniciar as cartas
     public void iniciarCartas(){
 
         for(Naipes naipe: Naipes.values()){
@@ -48,11 +49,13 @@ public class Baralho {
         }
     }
 
+    // Método que permite o batalho se embaralhar
     public void embaralharCartas(){
        Collections.shuffle(this.cartas);
        this.setEstaEmbaralhado(true);
     }
 
+    // Método que faz com que o baralho entregue um número n de cartas
     public ArrayList<Carta> retirarNCartas(int n){
 
         ArrayList<Carta> cartasRetiradas = new ArrayList<>();
