@@ -23,6 +23,7 @@
       - [Embaralhando um baralho através do PUT](#embaralhando-um-baralho-através-do-put)
       - [Retirando n cartas de um baralho através do PUT](#retirando-n-cartas-de-um-baralho-através-do-put)
       - [Deletando um baralho através do DELETE](#deletando-um-baralho-através-do-delete)
+  - [Acessando a documentação Open API do projeto](#acessando-a-documentação-open-api-do-projeto)
 
 ## Objetivo
 
@@ -139,5 +140,8 @@ Com toda essa apresentação da sintaxe do cliente cURL adaptada para esse proje
 #### Deletando um baralho através do DELETE
 ![Deletando um baralho com DELETE](/images/DELETE_Deleta_Baralho.png)
 
+## Acessando a documentação Open API do projeto
+Após executar o projeto, você pode acessar a OpenAPI do projeto entrando na seguinte URL (considerando que você está na máquina local onde a palicação está sendo executada): http://localhost:8080/swagger-ui/index.html#/baralho-controller
+![Acessando a OpenAPI do projeto](/images/Acessando_a_OpenAPI.png)
 
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/g-3PKEPq)
