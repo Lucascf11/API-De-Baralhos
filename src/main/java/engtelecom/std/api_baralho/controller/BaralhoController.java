@@ -24,7 +24,12 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import engtelecom.std.api_baralho.entities.Carta;
 import engtelecom.std.api_baralho.service.BaralhoService;
 
-
+/**
+ * Controlador para gerenciar operações relacionadas a baralhos de cartas.
+ * 
+ * Esta classe expõe endpoints REST para criar, acessar, embaralhar, retirar cartas e excluir baralhos,
+ * além de fornecer imagens das cartas.
+ */
 @RestController
 
 @RequestMapping({ "/baralhos", "/baralhos/" })
@@ -32,12 +37,24 @@ public class BaralhoController {
     @Autowired
     private BaralhoService baralhoService;
 
+    /**
+     * Retorna todos os identificadores de baralhos existentes.
+     * 
+     * @return Um conjunto contendo todos os identificadores de baralhos.
+     */
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Set<String> retornarBaralhos(){
         return this.baralhoService.retornarTodosBaralhos();
     }
 
+    /**
+     * Retorna todas as cartas de um baralho específico. Se o baralho estiver embaralhado,
+     * retorna uma mensagem de erro indicando que as cartas não podem ser listadas.
+     * 
+     * @param id O identificador do baralho.
+     * @return Um JSON contendo todas as cartas do baralho ou uma mensagem de erro se o baralho estiver embaralhado.
+     */
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public StringBuilder retornarTodasAsCartasDeBaralho (@PathVariable String id){
@@ -61,6 +78,12 @@ public class BaralhoController {
         return jsonSeBaralhoEmbaralhado;
     }
 
+    /**
+     * Retorna a imagem de uma carta específica.
+     * 
+     * @param carta O código da carta cuja imagem será retornada.
+     * @return Um {@link ResponseEntity} contendo a imagem da carta.
+     */
     @GetMapping(value = "/carta/{carta}", produces = MediaType.IMAGE_PNG_VALUE)
     @ResponseBody
     public ResponseEntity<InputStreamResource> getImage(@PathVariable String carta) {
@@ -68,12 +91,23 @@ public class BaralhoController {
         return ResponseEntity.ok().body(new InputStreamResource(is));
     }
 
+    /**
+     * Cria um novo baralho e retorna seu identificador.
+     * 
+     * @return O identificador do novo baralho.
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public String criarBaralho(){
         return this.baralhoService.criarBaralho();
     }
 
+    /**
+     * Embaralha as cartas de um baralho específico e retorna um JSON informando o sucesso da operação e o número de cartas restantes.
+     * 
+     * @param id O identificador do baralho a ser embaralhado.
+     * @return Um JSON contendo informações sobre o sucesso da operação e o número de cartas restantes.
+     */
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public StringBuilder embaralharCartas(@PathVariable String id){
@@ -93,11 +127,15 @@ public class BaralhoController {
         return jsonEmbaralhou;
     }
     
-    // Aqui estamos dizendo que essa operação utilizará do método PUT e precisará consumir um tipo de mídia de texto para funcionar
+    /**
+     * Retira um número específico de cartas de um baralho e retorna um JSON com as cartas retiradas e o número de cartas restantes.
+     * 
+     * @param id O identificador do baralho.
+     * @param n O número de cartas a serem retiradas.
+     * @return Um JSON contendo as cartas retiradas e o número de cartas restantes ou uma mensagem de erro.
+     */
     @PutMapping(value = "/{id}", consumes = MediaType.TEXT_PLAIN_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    
-    // n tem que ser String porque o MediaType.TEXT_PLAIN_VALUE trabalha com esse tipo de dados
     public StringBuilder retirarNCartasBaralho(@PathVariable String id, @RequestBody String n){
         // Converte-se n para um Integer, dessa maneira, fica mais palpável de realizar operações, como retirar n cartas de um baralho, por exemplo
         Integer numeroCartas = Integer.parseInt(n);
@@ -134,6 +172,12 @@ public class BaralhoController {
         return jsonRetorno;
     }
 
+    /**
+     * Exclui um baralho da coleção de baralhos.
+     * 
+     * @param id O identificador do baralho a ser excluído.
+     * @return Um status HTTP indicando o resultado da operação.
+     */
     @DeleteMapping("/{id}")
     public String deletarBaralho(@PathVariable String id){
         // Se o ID do baralho existir, retornar 204 NO_CONTENT, caso contrário, retornar 404 NOT_FOUNDED
@@ -143,8 +187,12 @@ public class BaralhoController {
         return HttpStatus.NOT_FOUND.toString();
     }
     
-
-    // Método privado que formata a resposta em um JSON a partir de uma lista de cartas recebidas
+   /**
+     * Formata uma lista de cartas em JSON.
+     * 
+     * @param listaCartas A lista de cartas a ser formatada.
+     * @return Um {@link StringBuilder} contendo o JSON das cartas.
+     */
     private StringBuilder formatarJsonCartas(ArrayList<Carta> listaCartas){
         StringBuilder json = new StringBuilder();
         json.append("{");
@@ -172,7 +220,11 @@ public class BaralhoController {
 
     }
 
-    // Método privado que monta um JSON dizendo que baralho não foi encontrado
+    /**
+     * Cria um JSON indicando que o baralho não foi encontrado.
+     * 
+     * @return Um {@link StringBuilder} contendo o JSON de erro.
+     */
     private StringBuilder jsonBaralhoNaoEncontrado(){
         StringBuilder jsonNaoEncontrou = new StringBuilder();
         jsonNaoEncontrou.append("{")

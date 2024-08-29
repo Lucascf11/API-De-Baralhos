@@ -7,6 +7,11 @@ import java.util.*;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * Serviço para gerenciar baralhos de cartas.
+ * 
+ * Esta classe fornece métodos para criar, acessar, embaralhar, retirar cartas e excluir baralhos de uma coleção.
+ */
 @Component
 public class BaralhoService {
 
@@ -14,12 +19,20 @@ public class BaralhoService {
     private HashMap<String,Baralho> baralhos = new HashMap<>();
 
 
-    // Método que retorna todos os baralhos da tabela Hash de baralhos
+    /**
+     * Retorna todos os identificadores de baralhos existentes.
+     * 
+     * @return Um conjunto contendo todos os identificadores de baralhos.
+     */
     public Set<String> retornarTodosBaralhos(){
         return this.baralhos.keySet();
     }
 
-    // Método que cria um baralho novo e adiciona na HashMap, cuja chave é um UUID, que atua como ID desse baralho em questão
+    /**
+     * Cria um novo baralho, inicializa suas cartas e adiciona na HashMap.
+     * 
+     * @return O identificador único do baralho criado.
+     */
     public String criarBaralho(){
         String idBaralho = UUID.randomUUID().toString();
         Baralho novoBaralho = new Baralho(idBaralho);
@@ -28,23 +41,43 @@ public class BaralhoService {
         return idBaralho;
     }
 
-    // Procura um baralho na HashMap e retorna todas as cartas dele
+    /**
+     * Retorna todas as cartas de um baralho específico.
+     * 
+     * @param id O identificador do baralho.
+     * @return Uma lista contendo todas as cartas do baralho especificado.
+     */
     public ArrayList<Carta> retornarTodasAsCartasDeBaralho(String id){
         return this.baralhos.get(id).getCartas();
     }
 
-    // Procura um baralho na HashMap e embaralha ele
+    /**
+     * Embaralha as cartas de um baralho específico.
+     * 
+     * @param id O identificador do baralho.
+     */
     public void embaralharBaralho(String id){
         this.baralhos.get(id).embaralharCartas();
     }
 
-    // Procura um baralho na HashMap e retira "n" cartas dele
+    /**
+     * Retira um número específico de cartas de um baralho.
+     * 
+     * @param id O identificador do baralho.
+     * @param n O número de cartas a serem retiradas.
+     * @return Uma lista contendo as cartas retiradas do baralho.
+     */
     public ArrayList<Carta> retirarNCartasDeBaralho(String id, Integer n){
         ArrayList<Carta> cartasRetiradas = this.baralhos.get(id).retirarNCartas(n);
         return cartasRetiradas;
     }
 
-    // Procura um baralho na HashMap e o exclui da estrutura de dados
+    /**
+     * Exclui um baralho da coleção de baralhos.
+     * 
+     * @param id O identificador do baralho a ser excluído.
+     * @return {@code true} se o baralho foi excluído com sucesso; {@code false} caso contrário.
+     */
     public boolean excluirBaralho(String id){
 
         if(this.baralhos.containsKey(id)){
@@ -54,10 +87,21 @@ public class BaralhoService {
         return false;
     }
 
+    /**
+     * Obtém o número de cartas restantes em um baralho específico.
+     * 
+     * @param id O identificador do baralho.
+     * @return O número de cartas restantes no baralho.
+     */
     public int obterCartasRestantes(String id){
         return this.baralhos.get(id).getCartas().size();
     }
-
+    
+    /**
+     * Obtém a coleção de baralhos.
+     * 
+     * @return A coleção de baralhos.
+     */
     public HashMap<String, Baralho> getBaralhos() {
         return baralhos;
     }
